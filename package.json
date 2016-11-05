@@ -86,7 +86,7 @@
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
     "vue": "^2.0.3",
-    "vue-dev-server": "2.0.2",
+    "vue-dev-server": "^2.0.4",
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^9.7.0",
@@ -99,6 +99,14 @@
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
   },
+  "keywords": [
+    "vue",
+    "component",
+    "material",
+    "animation",
+    "effect",
+    "wemake.services"
+  ],
   "main": "index.js",
   "repository": {
     "url": "https://github.com/wemake-services/vue-material-ripple.git",
