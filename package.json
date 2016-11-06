@@ -1,6 +1,6 @@
 {
   "name": "vue-material-ripple",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Simple material ripple effect wrapped in a component",
   "author": "sobolevn <mail@sobolevn.me>",
   "private": false,
