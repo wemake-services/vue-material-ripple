@@ -6,8 +6,6 @@
 </template>
 
 <script>
-  import offset from 'document-offset'
-
   export default {
     name: 'material-ripple',
     computed: {
@@ -18,7 +16,7 @@
 
         if (this.isAnimated) {
           // This class needs to be set every time,
-          // ootherwise animation will not work:
+          // otherwise animation will not work:
           classes.push('ripple--animation')
         }
 
@@ -80,6 +78,7 @@
         // Note, that this component must have a parent:
         if (!this.container) return // this is the actuall logic
 
+        const offset = require('document-offset') // ssr-friendly
         const position = offset(this.container) // polyfill
 
         // This method works for both click and touch events:
