@@ -36,4 +36,4 @@ npm install vue-material-ripple
 </script>
 ```
 
-For more examples, please check [`/dev`](https://github.com/wemake-services/vue-material-ripple/tree/master/dev) folder and the [project's website](http://wemake.services/vue-material-ripple).
+For more examples, please check [`/play`](https://github.com/wemake-services/vue-material-ripple/tree/master/play) folder and the [project's website](http://wemake.services/vue-material-ripple).

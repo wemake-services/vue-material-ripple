@@ -5,6 +5,7 @@
   "globals": {
     "expect": true,
     "sinon": true,
-    "assert": true
+    "assert": true,
+    "MouseEvent": true
   }
 }

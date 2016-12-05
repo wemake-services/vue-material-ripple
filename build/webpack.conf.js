@@ -1,5 +1,6 @@
 var path = require('path')
 var projectRoot = path.resolve(__dirname, '../')
+var dist = path.join(projectRoot, 'dist')
 
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -9,7 +10,7 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
-    path: projectRoot,
+    path: dist,
     filename: 'index.js',
     library: 'VueMaterialInput',
     libraryTarget: 'umd'
@@ -40,7 +41,7 @@ module.exports = {
   },
   vue: {
     loaders: {
-      scss: ExtractTextPlugin.extract(
+      sass: ExtractTextPlugin.extract(
         'vue-style-loader', 'css-loader!sass-loader'
       )
     },

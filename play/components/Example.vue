@@ -1,6 +1,5 @@
 <template>
-  <div class="ripple-examples__component">
-    <a href="#">back</a>
+  <div class="ripple-example">
     <h1>You can place Material Ripple effect on any other component</h1>
     <button type="button" class="ripple-example-button">
       Button
@@ -26,7 +25,7 @@
 </template>
 
 <script>
-  import MaterialRipple from '../src/components/MaterialRipple.vue'
+  import MaterialRipple from '../../src/components/MaterialRipple.vue'
 
   module.exports = {
     name: 'material-ripple-examples',
@@ -36,7 +35,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="sass">
   %base-example {
     background: orange;
     color: white;
@@ -48,26 +47,20 @@
     transform: translate(0);
   }
 
-  .ripple-examples__component {
-    max-width: 300px;
+  .ripple-example-button {
+    @extend %base-example;
+
+    font-size: 18px;
+    outline: none;
+    border: none;
+  }
+
+  .ripple-example-div {
+    @extend %base-example;
+  }
+
+  .ripple-example-a {
+    @extend %base-example;
     display: block;
-    margin: 0 auto;
-
-    .ripple-example-button {
-      @extend %base-example;
-
-      font-size: 18px;
-      outline: none;
-      border: none;
-    }
-
-    .ripple-example-div {
-      @extend %base-example;
-    }
-
-    .ripple-example-a {
-      @extend %base-example;
-      display: block;
-    }
   }
 </style>

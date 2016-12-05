@@ -1,29 +1,34 @@
 <template>
-  <div class="ripple-customization__component">
-    <a href="#">back</a>
+  <div class="ripple-example">
     <h1>You can customize Material Ripple effect</h1>
-    <button type="button" class="ripple-customization-button button--white">
-      Button
-      <MaterialRipple className="ripple--black"></MaterialRipple>
+    <button
+      type="button"
+      class="ripple-customization-button button--white ripple--black">
+        Button
+        <MaterialRipple></MaterialRipple>
     </button>
 
     <hr>
 
-    <button type="button" class="ripple-customization-button button--orange">
-      Button
-      <MaterialRipple className="ripple--white"></MaterialRipple>
+    <button
+      type="button"
+      class="ripple-customization-button button--orange ripple--white">
+        Button
+        <MaterialRipple></MaterialRipple>
     </button>
 
     <hr>
 
-    <button type="button" class="ripple-customization-button button--white">
-      Button
-      <MaterialRipple className="ripple--custom"></MaterialRipple>
+    <button
+      type="button"
+      class="ripple-customization-button button--white ripple--orange">
+        Button
+        <MaterialRipple></MaterialRipple>
     </button>
 </template>
 
 <script>
-  import MaterialRipple from '../src/components/MaterialRipple.vue'
+  import MaterialRipple from '../../src/components/MaterialRipple.vue'
 
   module.exports = {
     name: 'material-ripple-customization',
@@ -33,8 +38,8 @@
   }
 </script>
 
-<style lang="scss">
-  .ripple-customization__component {
+<style lang="sass">
+  .ripple-example {
     max-width: 300px;
     display: block;
     margin: 0 auto;
@@ -62,9 +67,16 @@
       outline: none;
       border: none;
     }
+  }
 
-    // Custom styling
-    .ripple--custom {
+  // Custom styling
+
+  .material-ripple__component {
+    .ripple--black & {
+      background-color: rgba(0, 0, 0, .1);
+    }
+
+    .ripple--orange & {
       background-color: orange;
     }
   }

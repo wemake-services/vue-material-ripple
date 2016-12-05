@@ -1,28 +1,20 @@
 <template>
   <div
-    class="ripple__component"
-    :class="rippleClass"
-    :style="rippleStyle"></div>
+    class="material-ripple__component"
+    :class="computedClasses"
+    :style="computedStyles"></div>
 </template>
 
 <script>
   export default {
     name: 'material-ripple',
     computed: {
-      rippleClass () {
-        const classes = [
-          this.className
-        ]
-
-        if (this.isAnimated) {
-          // This class needs to be set every time,
-          // otherwise animation will not work:
-          classes.push('ripple--animation')
+      computedClasses () {
+        return {
+          'ripple--animation': this.isAnimated
         }
-
-        return classes
       },
-      rippleStyle () {
+      computedStyles () {
         return {
           top: this.top + 'px',
           left: this.left + 'px',
@@ -41,23 +33,24 @@
       }
     },
     props: {
-      className: {
-        type: String,
-        default: 'ripple--white'
+      center: {
+        type: Boolean,
+        default: false
+      },
+      size: {
+        type: Number,
+        default: null
       }
     },
     mounted () {
       // container is not reactive:
       this.container = this.$el.parentNode
-      if (!this.container) return // TODO: this is required for tests
 
       // We support both click and touch events:
       this.container.addEventListener('click', this.handleClick)
       this.container.addEventListener('touch', this.handleClick)
     },
     beforeDestroy () {
-      if (!this.container) return // TODO: this is required for tests
-
       this.container.removeEventListener('click', this.handleClick)
       this.container.removeEventListener('touch', this.handleClick)
     },
@@ -74,59 +67,80 @@
           this.animate(event)
         }
       },
-      animate (event) {
-        // Note, that this component must have a parent:
-        if (!this.container) return // this is the actuall logic
-
+      getDocumentOffset () {
         const offset = require('document-offset') // ssr-friendly
-        const position = offset(this.container) // polyfill
+        return offset(this.container) // polyfill
+      },
+      animate (event) {
+        const position = this.getDocumentOffset()
 
-        // This method works for both click and touch events:
-        const inputX = (event.type === 'click')
-          ? event.pageX : event.originalEvent.touches[0].pageX
-        const inputY = (event.type === 'click')
-          ? event.pageY : event.originalEvent.touches[0].pageY
-
-        const size = Math.max(
+        const size = Math.max( // getting the bigger size
           this.container.offsetWidth,
           this.container.offsetHeight
         )
-        const center = size / 2
 
+        let top
+        let left
+        let finalSize
+
+        if (this.center) {
+          // Working in a centered mode: animate from the single point.
+          finalSize = this.size || size
+          top = left = (size / 2) - (finalSize / 2)
+        } else {
+          // Working in a normal mode: animate from the clicked point.
+
+          // This method works for both click and touch events:
+          const inputX = (event.type === 'click')
+            ? event.pageX : event.originalEvent.touches[0].pageX
+          const inputY = (event.type === 'click')
+            ? event.pageY : event.originalEvent.touches[0].pageY
+
+          const center = size / 2
+
+          finalSize = size
+          top = inputY - position.top - center
+          left = inputX - position.left - center
+        }
+
+        this.setInnerStyles(
+          finalSize, top, left
+        )
+      },
+      setInnerStyles (size, top, left) {
         // Mutating the inner state:
         this.isAnimated = true
         this.width = this.height = size
-        this.top = inputY - position.top - center
-        this.left = inputX - position.left - center
+        this.top = top
+        this.left = left
       }
     }
   }
 </script>
 
-<style lang="scss">
-  .ripple__component {
+<style lang="sass">
+  .material-ripple__component {
     position: absolute;
     border-radius: 50%;
     transform: scale(0);
 
-    // Skins:
-
-    &.ripple--black {
-      background: rgba(0, 0, 0, .1);
-    }
-
-    &.ripple--white {
-      background: rgba(255, 255, 255, .4);
-    }
-
-    // Animation:
-
     &.ripple--animation {
-      animation: ripple 1s linear,
+      animation: ripple 1s linear; // runs the animation on element.
     }
   }
 
+  // Theme:
+
+  .material-ripple__component {
+    background: rgba(255, 255, 255, .4); //
+  }
+
+  // Animation:
+
   @keyframes ripple {
+    from {
+      opacity: .5;
+    }
     to {
       opacity: 0;
       transform: scale(3);

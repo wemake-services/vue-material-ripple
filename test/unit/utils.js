@@ -1,11 +1,18 @@
-import Vue from 'vue'
+import Vue from 'vue' // runtime
 
-export function getComponent (Component, propsData, dependencies) {
-  if (dependencies) {
-    for (let dep of dependencies) {
-      Vue.use(dep)
-    }
-  }
+import Basic from './fixtures/Basic'
+
+export function getComponent (Component, propsData) {
   const Ctor = Vue.extend(Component)
-  return new Ctor({propsData}).$mount()
+  return new Ctor({ propsData }).$mount()
+}
+
+export function getContainer (Component, Container) {
+  Vue.extend(Component)
+  const Ctor = Vue.extend(Container)
+
+  const c = new Ctor()
+  c.$mount()
+
+  return c.$refs.ripple
 }

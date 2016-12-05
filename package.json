@@ -12,19 +12,19 @@
     "test:security": "./node_modules/.bin/nsp check",
     "test": "npm run test:unit && npm run test:security",
     "lint": "eslint --ext .js,.vue src test/unit/specs dev",
-    "dev:server": "./node_modules/.bin/vue-dev-server",
-    "ghpages": "./node_modules/.bin/vue-dev-server --static docs/ && ./node_modules/.bin/gh-pages -d docs"
+    "ghpages": "npm run play:build && ./node_modules/.bin/gh-pages -d dist-play",
+    "play": "vue-play start",
+    "play:build": "vue-play build"
   },
   "files": [
     "src/",
-    "dev/",
-    "build/",
-    "style.css",
-    "index.js",
+    "src/",
+    "dist/",
+    "LICENSE.md",
     "README.md"
   ],
   "peerDependencies": {
-    "vue": "~2.0"
+    "vue": "2.x.x"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -82,16 +82,19 @@
     "publish-please": "^2.2.0",
     "sass-loader": "^4.0.2",
     "selenium-server": "2.53.1",
+    "simulant": "^0.2.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.3",
-    "vue-dev-server": "^2.0.4",
+    "vue": "^2.1.4",
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.2.3",
-    "vue-loader": "^9.7.0",
+    "vue-loader": "^10.0.2",
+    "vue-play": "^2.1.1",
+    "vue-play-cli": "^1.0.4",
     "vue-router": "^2.0.1",
     "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.4",
     "vueify": "^9.2.4",
     "vueify-insert-css": "^1.0.0",
     "webpack": "^1.13.3",
@@ -107,7 +110,7 @@
     "effect",
     "wemake.services"
   ],
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "url": "https://github.com/wemake-services/vue-material-ripple.git",
     "type": "git"

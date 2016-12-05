@@ -1,12 +1,18 @@
-import MaterialRipple from 'components/MaterialRipple'
-import {getComponent} from '../utils'
+import Vue from 'vue'
+import simulant from 'simulant'
 
-describe('MaterialInput.vue', () => {
+import MaterialRipple from 'components/MaterialRipple'
+import Basic from '../fixtures/Basic'
+import { getComponent, getContainer } from '../utils'
+
+describe('MaterialRipple.vue', () => {
   let component
 
   beforeEach(() => {
-    component = getComponent(MaterialRipple, {})
+    component = getContainer(MaterialRipple, Basic)
   })
+
+  // Default data:
 
   it('has correct default data', () => {
     const data = MaterialRipple.data()
@@ -23,20 +29,55 @@ describe('MaterialInput.vue', () => {
   })
 
   it('has correct default props', () => {
-    expect(component.className).to.equal('ripple--white')
+    expect(component.center).to.equal(false)
+    expect(component.size).to.equal(null)
   })
 
-  it('handles click with no animation correctly', () => {
-    component.handleClick()
-    expect(component.isAnimated).to.equal(false)
+  // Computed:
+
+  it('has correct computedClasses', () => {
+    expect(component.computedClasses).to.deep.equal({
+      'ripple--animation': false
+    })
   })
 
-  it('handles click with animation correctly', () => {
+  it('has correct computedStyles', () => {
+    expect(component.computedStyles).to.deep.equal({
+      top: '0px',
+      left: '0px',
+      width: '0px',
+      height: '0px'
+    })
+  })
+
+  // Handlers:
+
+  it('handles click correctly', () => {
+    component.getDocumentOffset = () => {
+      return {top: 0, left: 0}
+    }
+
+    const event = simulant('click')
+    component.handleClick(event)
+    expect(component.isAnimated).to.equal(true)
+  })
+
+  it('handles click correctly while animation', (done) => {
+    component.test = false
+    component.animate = (_) => {
+      component.test = true
+    }
+
     component.isAnimated = true
     component.handleClick()
+
     expect(component.isAnimated).to.equal(false)
+
+    Vue.nextTick(() => {
+      expect(component.test).to.equal(true)
+
+      done()
+    })
   })
 
-  // TODO: we need to supply a parent component to the test
-  // instance for test to actually work.
 })
