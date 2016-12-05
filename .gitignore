@@ -104,3 +104,4 @@ test/unit/coverage
 
 # Built files:
 dist/
+dist-play/

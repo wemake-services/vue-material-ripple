@@ -3,7 +3,7 @@ import simulant from 'simulant'
 
 import MaterialRipple from 'components/MaterialRipple'
 import Basic from '../fixtures/Basic'
-import { getComponent, getContainer } from '../utils'
+import { getContainer } from '../utils'
 
 describe('MaterialRipple.vue', () => {
   let component
@@ -79,5 +79,4 @@ describe('MaterialRipple.vue', () => {
       done()
     })
   })
-
 })

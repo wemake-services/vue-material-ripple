@@ -1,6 +1,6 @@
 {
   "name": "vue-material-ripple",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple material ripple effect wrapped in a component",
   "author": "sobolevn <mail@sobolevn.me>",
   "private": false,
@@ -10,7 +10,7 @@
     "build": "./node_modules/.bin/webpack --config build/webpack.conf.js",
     "test:unit": "karma start test/unit/karma.conf.js --single-run",
     "test:security": "./node_modules/.bin/nsp check",
-    "test": "npm run test:unit && npm run test:security",
+    "test": "npm run test:unit && npm run test:security && npm run lint",
     "lint": "eslint --ext .js,.vue src test/unit/specs dev",
     "ghpages": "npm run play:build && ./node_modules/.bin/gh-pages -d dist-play",
     "play": "vue-play start",
