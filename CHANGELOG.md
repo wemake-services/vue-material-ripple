@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.1.1
+
+- Fixed dublicate issue with `files` inside `package.json`
+- Removed unused dependencies from `package.json`
+- Fixed `publish-please` to be fully working
+
 ## Version 1.1.0
 
 - *breaking* Changed the main file in `package.json`
